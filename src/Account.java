@@ -27,7 +27,7 @@ public class Account {
 		return balance;
 	}
 
-	// seters
+	// setters
 
 	public void setName(String name) {
 		this.name = name;
@@ -49,7 +49,7 @@ public class Account {
 	
 	public void info() {
 		System.out.println("ID: " + this.id);
-		System.out.println("Ime: " + this.name);
+		System.out.println("Ime: " + getName());
 		System.out.println("Stanje novca: " + this.balance + " KM");
 	}
 
