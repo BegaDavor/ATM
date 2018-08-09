@@ -1,19 +1,44 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ATM {
+	static Scanner input = new Scanner(System.in);
+	
+	public static double isDouble() {
+		while (true) {
+			try {
+				return input.nextDouble();
+			}
+			catch (InputMismatchException e) {
+				input.next();
+				System.out.println("Vas unos nije dobar. Probajte ponovo: ");
+			}
+		}
+	}
+	
+	public static int isInteger() {
+		while (true) {
+			try {
+				return input.nextInt();
+			}
+			catch (InputMismatchException e) {
+				input.next();
+				System.out.println("Vas unos nije dobar. Probajte ponovo: ");
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		ArrayList<Account> users = new ArrayList<>();
-		Scanner input = new Scanner(System.in);
-		String opcija = new String();
-
+		
+		int opcija;
 		do {
 			System.out.println(
 					"1 - Registracija korisnika, \n2 - Transfer novca, \n3 - Informacije o korisniku, \n0 - Izlaz \nIzaberite opciju: ");
-			opcija = input.next();
+			opcija = isInteger();
 
-			switch (Integer.parseInt(opcija)) {
+			switch (opcija) {
 			case 0:
 				break;
 			case 1:
@@ -23,7 +48,7 @@ public class ATM {
 				String ime = input.next();
 				account.setName(ime);
 				System.out.println("Unesite svotu novca koju uplacujete na racun: ");
-				double novac = input.nextDouble();
+				double novac = isDouble();
 				account.setBalance(novac);
 				users.add(account);
 				break;
@@ -32,10 +57,10 @@ public class ATM {
 				int sourceAccount = input.nextInt();
 				System.out.println("Unesite ID racuna koji prima novac: ");
 				int targetAccount = input.nextInt();
-				System.out.println("Koliko novca saljete: ");
-				double money = input.nextDouble();
+				
 				Account source = users.get(0);
 				Account target = users.get(0);
+				double money = 0;
 				for (int i = 0; i < users.size(); i++) {
 					if (users.get(i).getId() == sourceAccount) {
 						source = users.get(i);
@@ -43,6 +68,13 @@ public class ATM {
 						target = users.get(i);
 					}
 				}
+				do {
+				System.out.println("Koliko novca saljete: ");
+				money = input.nextDouble();
+				if (money > source.getBalance()) {
+					System.out.println("Nemate dovoljno sredstava na racunu, probajte sa nekim manjim iznosom!");
+				}
+				}while (money > source.getBalance()); 
 				source.smanjiBalance(money);
 				target.povecajBalance(money);
 				break;
@@ -59,7 +91,7 @@ public class ATM {
 				}
 				break;
 			}
-		} while (Integer.parseInt(opcija) != 0);
+		} while (opcija != 0);
 
 		input.close();
 
