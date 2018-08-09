@@ -3,9 +3,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ATM {
-	static Scanner input = new Scanner(System.in);
+	static Scanner input = new Scanner(System.in); // skener
+	static ArrayList<Account> users = new ArrayList<>(); // baza podataka
 	
-	public static double isDouble() {
+	public static double isDouble() { // handle exception za double brojeve
 		while (true) {
 			try {
 				return input.nextDouble();
@@ -17,7 +18,7 @@ public class ATM {
 		}
 	}
 	
-	public static int isInteger() {
+	public static int isInteger() { // handle exception za integer brojeve
 		while (true) {
 			try {
 				return input.nextInt();
@@ -28,12 +29,24 @@ public class ATM {
 			}
 		}
 	}
+	
+	public static boolean exist(int id) {
+		boolean exist = false;
+		for (int i = 0; i < users.size(); i++) {
+			if(users.get(i).getId() == id) {
+				exist = true;
+				break;
+			}
+		}
+		return exist;
+	}
 
 	public static void main(String[] args) {
-		ArrayList<Account> users = new ArrayList<>();
 		
+		int sourceAccount = -1;
+		int targetAccount = -1;
 		int opcija;
-		do {
+		do { // GIU
 			System.out.println(
 					"1 - Registracija korisnika, \n2 - Transfer novca, \n3 - Informacije o korisniku, \n0 - Izlaz \nIzaberite opciju: ");
 			opcija = isInteger();
@@ -53,11 +66,21 @@ public class ATM {
 				users.add(account);
 				break;
 			case 2:
+				do {
 				System.out.println("Unsite ID racuna koji salje novac: ");
-				int sourceAccount = input.nextInt();
+				sourceAccount = isInteger();
+				if (exist(sourceAccount) == false) {
+					System.out.println("Korisnik sa unijetim ID brojem ne postoji!");
+				}
+				} while (exist(sourceAccount) == false);
+				do {
 				System.out.println("Unesite ID racuna koji prima novac: ");
-				int targetAccount = input.nextInt();
-				
+				targetAccount = isInteger();
+				if (exist(targetAccount) == false) {
+					System.out.println("Korisnik sa unijetim ID brojem ne postoji!");
+	
+				}
+				} while (exist(targetAccount) == false);
 				Account source = users.get(0);
 				Account target = users.get(0);
 				double money = 0;
