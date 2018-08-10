@@ -55,7 +55,10 @@ public class ATM {
 			case 0:
 				break;
 			case 1:
-				Account account = new Account();
+				Account account;
+				do {
+				account = new Account();
+				} while(exist(account.getId()));
 				System.out.println("Vas ID je: " + account.getId());
 				System.out.println("Unsite vase ime: ");
 				String ime = input.next();
@@ -93,7 +96,7 @@ public class ATM {
 				}
 				do {
 				System.out.println("Koliko novca saljete: ");
-				money = input.nextDouble();
+				money = isDouble();
 				if (money > source.getBalance()) {
 					System.out.println("Nemate dovoljno sredstava na racunu, probajte sa nekim manjim iznosom!");
 				}
@@ -103,7 +106,7 @@ public class ATM {
 				break;
 			case 3:
 				System.out.println("Upisite svoj ID: ");
-				int idTemp = input.nextInt();
+				int idTemp = isInteger();
 				for (int i = 0; i < users.size(); i++) {
 					if (users.get(i).getId() == idTemp) {
 						users.get(i).info();
