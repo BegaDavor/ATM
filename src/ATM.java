@@ -116,7 +116,10 @@ public class ATM {
 					}
 				}
 				break;
+			default: 
+				System.out.println("Unos opcije nije dobar.");
 			}
+			
 		} while (opcija != 0);
 
 		input.close();
