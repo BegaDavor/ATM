@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.PrintWriter;
 
 public class Account {
 
@@ -51,6 +53,16 @@ public class Account {
 		System.out.println("ID: " + this.id);
 		System.out.println("Ime: " + this.name);
 		System.out.println("Stanje novca: " + this.balance + " KM");
+	}
+	
+	public void ispisStanjaRacuna() throws Exception{
+		File racun = new File("/home/bega/eclipse-workspace/ATM");
+		PrintWriter output = new PrintWriter(racun);
+		output.println("Stanje racuna");
+		output.println("--------------------------");
+		output.println("ID: " + getId());
+		output.println("Ime: " + getName());
+		output.println("Stanje racuna: " + getBalance());
 	}
 
 }
