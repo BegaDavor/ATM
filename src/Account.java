@@ -56,13 +56,14 @@ public class Account {
 	}
 	
 	public void ispisStanjaRacuna() throws Exception{
-		File racun = new File("/home/bega/eclipse-workspace/ATM");
+		File racun = new File("/home/bega/eclipse-workspace/ATM/Racun");
 		PrintWriter output = new PrintWriter(racun);
 		output.println("Stanje racuna");
 		output.println("--------------------------");
 		output.println("ID: " + getId());
 		output.println("Ime: " + getName());
 		output.println("Stanje racuna: " + getBalance());
+		output.close();
 	}
 
 }

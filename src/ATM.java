@@ -48,7 +48,7 @@ public class ATM {
 		int opcija;
 		do { // GIU
 			System.out.println(
-					"1 - Registracija korisnika, \n2 - Transfer novca, \n3 - Informacije o korisniku, \n0 - Izlaz \nIzaberite opciju: ");
+					"1 - Registracija korisnika, \n2 - Transfer novca, \n3 - Informacije o korisniku, \n4 - Isprintaj stanje racuna, \n0 - Izlaz \nIzaberite opciju: ");
 			opcija = isInteger();
 
 			switch (opcija) {
@@ -110,6 +110,23 @@ public class ATM {
 				for (int i = 0; i < users.size(); i++) {
 					if (users.get(i).getId() == idTemp) {
 						users.get(i).info();
+						break;
+					} else {
+						System.out.println("Korisnik sa unijetim ID ne postoji.");
+					}
+				}
+				break;
+			case 4: 
+				System.out.println("Upisite svoj ID: ");
+				int idT = isInteger();
+				for (int i = 0; i < users.size(); i++) {
+					if (users.get(i).getId() == idT) {
+						try {
+							users.get(i).ispisStanjaRacuna();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						};
 						break;
 					} else {
 						System.out.println("Korisnik sa unijetim ID ne postoji.");
