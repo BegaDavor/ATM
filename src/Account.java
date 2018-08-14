@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Account {
 
@@ -53,6 +54,17 @@ public class Account {
 		System.out.println("ID: " + this.id);
 		System.out.println("Ime: " + getName());
 		System.out.println("Stanje novca: " + this.balance + " KM");
+		Scanner input = new Scanner("/home/bega/eclipse-workspace/ATM/Kartoni/" + getName());
+		while (input.hasNext()) {
+			input.nextLine();
+			input.nextLine();
+			input.nextLine();
+			input.nextLine();
+			input.nextLine();
+			String komentar = input.nextLine();
+			System.out.println("Komentar: " + komentar);
+		}
+		input.close();
 	}
 	
 	public void ispisStanjaRacuna() throws Exception{

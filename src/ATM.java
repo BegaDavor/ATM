@@ -1,9 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ATM {
 	static Scanner input = new Scanner(System.in); // skener
+	static Scanner inputString = new Scanner(System.in);// skener za string
 	static ArrayList<Account> users = new ArrayList<>(); // baza podataka
 	
 	public static double isDouble() { // handle exception za double brojeve
@@ -41,7 +45,7 @@ public class ATM {
 		return exist;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		int sourceAccount = -1;
 		int targetAccount = -1;
@@ -66,6 +70,17 @@ public class ATM {
 				System.out.println("Unesite svotu novca koju uplacujete na racun: ");
 				double novac = isDouble();
 				account.setBalance(novac);
+				System.out.println("Komentar: ");
+				String komentar = inputString.nextLine();
+				
+				File karton = new File("/home/bega/eclipse-workspace/ATM/Kartoni/" + account.getName());
+				PrintWriter output = new PrintWriter(karton); 
+				output.println("Karton korisnika " + account.getName());
+				output.println();
+				output.println("ID: " + account.getId());
+				output.println("Trenutno stanje racuna: " + account.getBalance());
+				output.println("Komentar: " + "\n" + komentar);
+				output.close();
 				users.add(account);
 				break;
 			case 2:
