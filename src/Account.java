@@ -1,6 +1,10 @@
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Account {
 
@@ -49,25 +53,19 @@ public class Account {
 	public void smanjiBalance(double iznos) {
 		this.balance -= iznos;
 	}
-	
-	public void info() {
+
+	public void info() throws FileNotFoundException, IOException {
 		System.out.println("ID: " + this.id);
 		System.out.println("Ime: " + getName());
 		System.out.println("Stanje novca: " + this.balance + " KM");
-		Scanner input = new Scanner("/home/bega/eclipse-workspace/ATM/Kartoni/" + getName());
-		while (input.hasNext()) {
-			input.nextLine();
-			input.nextLine();
-			input.nextLine();
-			input.nextLine();
-			input.nextLine();
-			String komentar = input.nextLine();
-			System.out.println("Komentar: " + komentar);
-		}
-		input.close();
+
+		String komentar = Files.readAllLines(Paths.get("/home/bega/eclipse-workspace/ATM/Kartoni/" + getName())).get(5);
+
+		System.out.println("Komentar: \n" + komentar);
+
 	}
-	
-	public void ispisStanjaRacuna() throws Exception{
+
+	public void ispisStanjaRacuna() throws Exception {
 		File racun = new File("/home/bega/eclipse-workspace/ATM/Racun");
 		PrintWriter output = new PrintWriter(racun);
 		output.println("Stanje racuna");
