@@ -1,9 +1,10 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+
 
 public class ATM {
 	static Scanner input = new Scanner(System.in); // skener
@@ -78,7 +79,7 @@ public class ATM {
 				output.println("Karton korisnika " + account.getName());
 				output.println();
 				output.println("ID: " + account.getId());
-				output.println("Trenutno stanje racuna: " + account.getBalance());
+				output.println("Pocetno stanje racuna: " + account.getBalance());
 				output.println("Komentar: " + "\n" + komentar);
 				output.close();
 
@@ -108,7 +109,8 @@ public class ATM {
 					// Simulirat cemo ubacivanje kartice u bankomat tako sto ce korisnik upisati svoje ime, pa cemo po tome naci karticu
 					System.out.println("Upisite svoje ime: ");
 					String imeKorisnika = inputString.next();
-					Scanner inputKartica = new Scanner(kartica);
+					File korisnik = new File("/home/bega/eclipse-workspace/ATM/Kartice/" + imeKorisnika);
+					Scanner inputKartica = new Scanner(korisnik);
 					while (inputKartica.hasNext()) {
 					sourceAccount = inputKartica.nextInt();
 					break;
