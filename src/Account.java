@@ -59,14 +59,14 @@ public class Account {
 		System.out.println("Ime: " + getName());
 		System.out.println("Stanje novca: " + this.balance + " KM");
 
-		String komentar = Files.readAllLines(Paths.get("/home/bega/eclipse-workspace/ATM/Kartoni/" + getName())).get(5);
+		String komentar = Files.readAllLines(Paths.get("Kartoni/" + getName())).get(5);
 
 		System.out.println("Komentar: \n" + komentar);
 
 	}
 
 	public void ispisStanjaRacuna() throws Exception {
-		File racun = new File("/home/bega/eclipse-workspace/ATM/Racun");
+		File racun = new File("Racun");
 		PrintWriter output = new PrintWriter(racun);
 		output.println("Stanje racuna");
 		output.println("--------------------------");
