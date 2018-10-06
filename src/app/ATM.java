@@ -1,8 +1,12 @@
+package app;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import atm.Account;
 
 public class ATM {
 	static Scanner input = new Scanner(System.in); // skener
